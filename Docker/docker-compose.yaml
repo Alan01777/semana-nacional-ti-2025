@@ -1,0 +1,10 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: custom-nginx
+    ports:
+      - "8079:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped

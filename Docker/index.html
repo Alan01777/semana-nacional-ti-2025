@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Introdução ao Docker e seus conceitos fundamentais">
+    <title>Guia Introdutório ao Docker - Conceitos e Práticas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        h1, h2, h3 {
+            color: #2496ed;
+        }
+        h1 {
+            border-bottom: 2px solid #2496ed;
+            padding-bottom: 10px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .concept-box {
+            background-color: #f0f8ff;
+            border-left: 4px solid #2496ed;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        code {
+            background-color: #e6f3ff;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .docker-command {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            display: block;
+            overflow-x: auto;
+        }
+        .benefits-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .benefits-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guia Introdutório ao Docker</h1>
+        
+        <section>
+            <h2>O que é Docker?</h2>
+            <p>Docker é uma plataforma aberta para desenvolver, enviar e executar aplicações em <strong>containers</strong>. Containers permitem empacotar uma aplicação com todas as suas dependências em uma unidade padronizada para desenvolvimento e deploy.</p>
+            
+            <div class="concept-box">
+                <h3>Analogia Simplificada</h3>
+                <p>Imagine containers como <strong>malas de viagem</strong> que contêm tudo o que seu aplicativo precisa para funcionar (código, bibliotecas, configurações), permitindo que ele seja "transportado" e executado em qualquer ambiente (desenvolvimento, teste, produção) sem problemas de compatibilidade.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Conceitos Fundamentais</h2>
+            
+            <article>
+                <h3>1. Container</h3>
+                <p>Um <strong>container</strong> é uma unidade de software leve, autossuficiente e executável que inclui tudo o que é necessário para executar um aplicativo: código, runtime, ferramentas do sistema, bibliotecas e configurações.</p>
+            </article>
+            
+            <article>
+                <h3>2. Imagem Docker</h3>
+                <p>Uma <strong>imagem</strong> é um modelo somente leitura com instruções para criar um container. Ela contém o sistema de arquivos e os metadados necessários para executar a aplicação.</p>
+                <p class="docker-command">docker pull nginx # Baixa a imagem oficial do Nginx</p>
+            </article>
+            
+            <article>
+                <h3>3. Dockerfile</h3>
+                <p>Um <strong>Dockerfile</strong> é um arquivo de texto que contém todas as instruções necessárias para construir uma imagem Docker.</p>
+                <p>Exemplo básico:</p>
+                <p class="docker-command">
+                    # Use the official Nginx image as the base image<br>
+                    FROM nginx:latest<br>
+                    <br>
+                    # Copy the custom nginx.conf to the container<br>
+                    COPY nginx.conf /etc/nginx/nginx.conf<br>
+                    <br>
+                    # Copy the HTML file to the default Nginx HTML directory<br>
+                    COPY index.html /usr/share/nginx/html/<br>
+                    <br>
+                    # Expose port 80<br>
+                    EXPOSE 80<br>
+                    <br>
+                    # Start Nginx<br>
+                    CMD ["nginx", "-g", "daemon off;"]<br>
+                </p>
+            </article>
+            
+            <article>
+                <h3>4. Docker Hub/Registry</h3>
+                <p>Repositórios onde imagens Docker são armazenadas e compartilhadas. O <strong>Docker Hub</strong> é o registry público oficial, mas você também pode criar registries privados.</p>
+            </article>
+        </section>
+        
+        <section>
+            <h2>Vantagens do Docker</h2>
+            <ul class="benefits-list">
+                <li><strong>Isolamento</strong>: Aplicações rodam em ambientes isolados</li>
+                <li><strong>Portabilidade</strong>: "Funciona na minha máquina" deixa de ser problema</li>
+                <li><strong>Eficiência</strong>: Consome menos recursos que máquinas virtuais</li>
+                <li><strong>Consistência</strong>: Ambientes idênticos em desenvolvimento e produção</li>
+                <li><strong>Escalabilidade</strong>: Fácil replicação e orquestração de containers</li>
+                <li><strong>Versionamento</strong>: Controle de versões de imagens como código</li>
+                <li><strong>Rápida implantação</strong>: Containers iniciam em segundos</li>
+                <li><strong>Ecossistema</strong>: Grande comunidade e ferramentas complementares</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Exemplo Prático</h2>
+            <p>Para executar um servidor web Nginx em um container Docker:</p>
+            <p class="docker-command">
+                # Baixar a imagem oficial do Nginx<br>
+                docker pull nginx<br><br>
+                
+                # Executar um container baseado na imagem<br>
+                docker run --name meu-nginx -d -p 8080:80 nginx<br><br>
+                
+                # Acessar o servidor em http://localhost:8080
+            </p>
+            <p>Este comando cria um container isolado executando o Nginx, mapeando a porta 80 do container para a porta 8080 da sua máquina.</p>
+        </section>
+        
+        <section>
+            <h2>Quando usar Docker?</h2>
+            <ul>
+                <li>Padronizar ambientes de desenvolvimento entre equipes</li>
+                <li>Simplificar configuração de ambientes complexos</li>
+                <li>Implementar microsserviços</li>
+                <li>Criar pipelines CI/CD eficientes</li>
+                <li>Implementar deploy escalável em produção</li>
+                <li>Executar múltiplas versões do mesmo software</li>
+            </ul>
+        </section>
+        
+        <footer>
+            <p>Docker revolucionou a forma como desenvolvemos, entregamos e executamos aplicações modernas, sendo hoje uma habilidade essencial para desenvolvedores e administradores de sistemas.</p>
+        </footer>
+    </div>
+</body>
+</html>
