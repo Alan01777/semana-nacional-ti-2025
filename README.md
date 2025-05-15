@@ -3,6 +3,8 @@
 Este projeto mostra como configurar um container Nginx com um arquivo de configuração e uma página inicial personalizados. Existem duas formas de fazer isso: usando o Docker pela linha de comando ou usando o Docker Compose.
 
 ---
+## Cursos no Drive
+[link](https://drive.google.com/drive/folders/13aRlsJax-3XXNjdz0f7MBQ4y76OBB1XB?usp=sharing)
 
 ## Pré-requisitos
 
